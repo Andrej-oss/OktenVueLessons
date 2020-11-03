@@ -1,58 +1,110 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+<div >
+  {{tittle}}
+  {{name + tittle}}
+  <p v-once>{{tittle}}</p>
+  <p>{{seyHello()}}</p>
+  <a v-bind:href="link">Google</a>
+  <p v-html="html"></p>
+  <button v-on:click="increase(2, $event)">click</button>
+  <button v-on:click="increament">Increment</button>
+  <button v-on:click="decrement">Decrement</button>
+  <p>{{counter}}</p>
+  <p>computedResult {{computedResult}}</p>
+  <p v-on:mousemove="onChangeCoordinates">Coordinates: {{coordinateX}} / {{coordinateY}}
+  <span v-on:mousemove="spot">Dead spot</span></p>
+  <input type="text" v-on:keyup.enter="alertMe" v-model="name"/>
+  <div class="demo" @click="attached = !attached"></div>
+  <div class="demo"></div>
+  <div class="demo" :class="{red:attached, yellow:!attached}"></div>
+  <input type="text" v-model="colorClass"/>
+  <div class="demo" :class="colorClass"></div>
+  <div class="demo" :style="{backgroundColor: colorClass}"></div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
+
+data(){
+    return{
+      tittle: 'Hello world',
+      name: 'Joe',
+      link: 'http://google.com',
+      html: '<p>say hello again</p>',
+      counter: 0,
+      coordinateX: 0,
+      coordinateY: 0,
+      attached: false,
+      colorClass:''
+    }
+}
+,
+  computed: {
+computedResult(){
+  return this.counter > 5 ?  'greater then 5' : 'lower then 5';
+    }
+  },
+
+  methods:{
+    seyHello(){
+      return this.tittle = 'Buy World';
+    },
+    increase(step, event){
+      console.log(this.counter, event)
+     this.counter += step;
+    },
+    onChangeCoordinates($event){
+      this.coordinateX = $event.clientX;
+      this.coordinateY = $event.clientY;
+      console.log(this.coordinateX,this.coordinateY)
+    },
+    spot($event){
+      $event.stopPropagation();
+    },
+    alertMe(){
+      alert("dsfdsfs")
+    },
+    increament(){
+      this.counter++;
+    },
+    decrement(){
+      this.counter--;
+    }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
+.demo{
+width: 100px;
+height: 100px;
+  background-color: darkcyan;
   display: inline-block;
-  margin: 0 10px;
+  margin:10px;
 }
-a {
-  color: #42b983;
+  .red{
+    background-color: red;
+
+  }
+.yellow{
+  background-color: yellow;
+}
+.green{
+  background-color: green;
+
 }
 </style>
