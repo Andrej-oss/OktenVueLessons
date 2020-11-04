@@ -57,7 +57,9 @@
                 console.log(this.toDoes)
             },
             onDelete(i){
-                this.toDoes.pop(i);
+                console.log(i);
+                this.toDoes.splice(i,1);
+
             }
         }
     }
