@@ -50,9 +50,9 @@
             }
         },
         methods: {
-            onSave(form, e) {
-                e.preventDefault();
-                console.log(form.fields.name, form.fields.type);
+                        onSave(form, e) {
+                            e.preventDefault();
+                            console.log(form.fields.name, form.fields.type);
                  this.toDoes.push({tittle: form.fields.type, todo: form.fields.name });
                 console.log(this.toDoes)
             },

@@ -7,7 +7,17 @@ import VueDynamicForms from '@asigloo/vue-dynamic-forms';
 
 
 Vue.config.productionTip = false;
+export const eventBus = new Vue();
 
+Vue.filter('toLowerCase', (value) => value.toLowerCase());
+Vue.directive('heightLight', {
+  bind(el, binding, vNode){
+    console.log(el, binding, vNode)
+    console.log(binding.expression);
+    const color = binding.value;
+    el.style.backgroundColor = color;
+  }
+})
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(VueDynamicForms)

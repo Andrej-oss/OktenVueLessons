@@ -2,20 +2,74 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <ToDo/>
+    <!--<ToDo/>-->
+<!--    <p ref="ref">{{tittle}}</p>-->
+<!--    <b-button @click="changeTittle">Update</b-button>-->
+<!--    <b-button @click="destroy">Destroy</b-button>-->
+    <FrameWorkList/>
   </div>
 </template>
 
 <script>
 
-import ToDo from "./components/ToDo";
+//import ToDo from "./components/ToDo";
+
+import FrameWorkList from "./components/frameworks/FrameWorkList";
 
 export default {
   name: 'App',
   components: {
     //HelloWorld,
-    ToDo
-  }
+    //ToDo
+    FrameWorkList
+  },
+  data(){
+    return{
+      tittle: 'Hello world'
+    }
+  },
+ /* methods: {
+    changeTittle(){
+      this.tittle = "fuck you world"
+    },
+    destroy(){
+      this.$destroy();
+    }
+  },
+    beforeCreate() {
+      console.log('before create');
+      console.log(this.tittle);
+    },
+    created() {
+      console.log('created');
+      console.log(this.tittle);
+    },
+  beforeMount() {
+    console.log('before mount');
+    console.log(this.tittle);
+    console.log(this.$refs.ref);
+  },
+  mounted() {
+    console.log('Mounted');
+    console.log(this.tittle);
+    console.log(this.$refs.ref)
+  },
+  updated() {
+    console.log('Updated');
+    console.log(this.$refs.ref);
+    console.log(this.tittle);
+  },
+  beforeUpdate() {
+    console.log('before update');
+    console.log(this.$refs.ref)
+    console.log(this.tittle);
+  },
+  destroyed() {
+    console.log('Destroyed')
+  },
+  beforeDestroy() {
+    console.log('before destroy');
+  }*/
 }
 </script>
 
