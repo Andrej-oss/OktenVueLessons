@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import VueDynamicForms from '@asigloo/vue-dynamic-forms';
+import '../src/resource/index'
 
 export const eventBus = new Vue();
 Vue.config.productionTip = false;

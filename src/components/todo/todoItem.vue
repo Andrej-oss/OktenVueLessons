@@ -5,6 +5,8 @@
                 <div class="card-body">
                     <h5 class="card-title">{{todo.tittle}}</h5>
                     <p class="card-text">{{todo.name}}</p>
+                    <p v-if="todo.completed" style="font-size: small">Completed</p>
+                    <p v-else style="font-size: small">Not Completed</p>
                     <a href="#" class="btn btn-primary" @click="onDelete(index)" style="margin-right: 10px">Delete</a>
                     <a href="#" class="btn btn-primary" @click="onUpdate(index)">Update</a>
                 </div>
@@ -35,6 +37,7 @@
                 this.$emit('HandlingIndexDelete', i)
             },
             onUpdate(i){
+                console.log(i)
                eventBus.$emit('HandlingIndexUpDate', i);
             }
         }
