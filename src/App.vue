@@ -6,7 +6,9 @@
 <!--    <p ref="ref">{{tittle}}</p>-->
 <!--    <b-button @click="changeTittle">Update</b-button>-->
 <!--    <b-button @click="destroy">Destroy</b-button>-->
-    <FrameWorkList/>
+<!--    <FrameWorkList/>-->
+    <Result />
+    <Counter />
   </div>
 </template>
 
@@ -14,18 +16,24 @@
 
 //import ToDo from "./components/ToDo";
 
-import FrameWorkList from "./components/frameworks/FrameWorkList";
+//import FrameWorkList from "./components/frameworks/FrameWorkList";
+
+import Result from "./components/Result";
+import Counter from "./components/Counter";
 
 export default {
   name: 'App',
   components: {
     //HelloWorld,
     //ToDo
-    FrameWorkList
+   // FrameWorkList
+    Result,
+    Counter
   },
   data(){
     return{
-      tittle: 'Hello world'
+      tittle: 'Hello world',
+      counter: 0
     }
   },
  /* methods: {

@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import VueDynamicForms from '@asigloo/vue-dynamic-forms';
+import {store} from "./store";
 
 
 Vue.config.productionTip = false;
@@ -18,10 +19,11 @@ Vue.directive('heightLight', {
     el.style.backgroundColor = color;
   }
 })
-Vue.use(BootstrapVue);
-Vue.use(IconsPlugin);
-Vue.use(VueDynamicForms)
+ Vue.use(BootstrapVue);
+ Vue.use(IconsPlugin);
+ Vue.use(VueDynamicForms)
 
 new Vue({
+  store,
   render: h => h(App),
 }).$mount('#app')
