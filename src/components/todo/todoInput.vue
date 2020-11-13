@@ -20,9 +20,10 @@
                     class="btn btn-primary"
                     @click="onSave(form, $event)"
                     style="margin-right: 10px">Create</button>
+
             <button type="submit"
                     class="btn btn-primary"
-                    @click="onUpdateToDO({id:`${todos[index].id}`, body: {tittle:form.fields.type, name: form.fields.name, completed: form.fields.checked}})">
+                    @click="onUpdateToDO({id:`${todos[index].id}`, body: {tittle:form.fields.type, name: form.fields.name, completed: form.fields.checked}, i: index})">
                 Update</button>
         </form>
     </div>

@@ -7,7 +7,7 @@
                     <p class="card-text">{{todo.name}}</p>
                     <p v-if="todo.completed" style="font-size: small">Completed</p>
                     <p v-else style="font-size: small">Not Completed</p>
-                    <a href="#" class="btn btn-primary" @click="onDelete(todo.id)" style="margin-right: 10px">Delete</a>
+                    <a href="#" class="btn btn-primary" @click="onDelete({id:todo.id, i: index})" style="margin-right: 10px">Delete</a>
                     <a href="#" class="btn btn-primary" @click="onUpdate(index)">Update</a>
                 </div>
             </div>

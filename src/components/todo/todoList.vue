@@ -1,6 +1,7 @@
 <template>
     <div>
         <todo-input @handlingSubmit="saveToDo($event)"  :todos="toDoes"/>
+        {{`${toDoes}`}}
         <div class="todo-cards">
             <div v-for="(todo, i) in toDoes" :key="todo.id">
                 <todo-item
@@ -41,12 +42,18 @@
         },
         computed: {
             ...mapState({
-                toDoes: state => state.todo
+                toDoes: state => {
+                    console.log(state.todo)
+                   return  state.todo
+                }
             }),
         },
         beforeMount() {
             this.getToDos()
         },
+        // beforeUpdate() {
+        //     this.getToDos();
+        // }
     }
 </script>
 <style scoped>
