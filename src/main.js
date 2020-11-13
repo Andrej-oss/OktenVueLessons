@@ -5,6 +5,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import VueDynamicForms from '@asigloo/vue-dynamic-forms';
 import '../src/resource/index'
+import {store} from "./store";
 
 export const eventBus = new Vue();
 Vue.config.productionTip = false;
@@ -15,5 +16,6 @@ Vue.use(VueDynamicForms);
 
 
 new Vue({
+  store,
   render: h => h(App),
 }).$mount('#app')

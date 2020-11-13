@@ -16,8 +16,14 @@
                 <input type="checkbox"
                        v-model="form.fields.checked" />
             </div>
-            <button type="submit" class="btn btn-primary" @click="onSave(form, $event)" style="margin-right: 10px">Create</button>
-            <button type="submit" class="btn btn-primary" @click="onUpdate(form, $event)">Update</button>
+            <button type="submit"
+                    class="btn btn-primary"
+                    @click="onSave(form, $event)"
+                    style="margin-right: 10px">Create</button>
+            <button type="submit"
+                    class="btn btn-primary"
+                    @click="onUpdateToDO({id:`${todos[index].id}`, body: {tittle:form.fields.type, name: form.fields.name, completed: form.fields.checked}})">
+                Update</button>
         </form>
     </div>
 </template>
@@ -25,14 +31,18 @@
 <script>
     import {FormField} from "@asigloo/vue-dynamic-forms/src/core/utils";
     import {eventBus} from "../../main";
-    import {Api} from "../api";
+    import {todoModule} from "../../store/todo";
+    import {createNamespacedHelpers} from "vuex";
+    import {ACTIONS_UPDATE_TODO} from "../../store/todo/types";
+
+    const {mapActions} = createNamespacedHelpers(todoModule);
 
     export default {
         name: "todoInput",
-        data(){
-            return{
+        data() {
+            return {
                 index: Number,
-                form:{
+                form: {
                     id: 'formField',
                     fields: new FormField({
                         type: 'text',
@@ -42,24 +52,28 @@
                 }
             }
         },
-        methods:{
-            onSave(form, event){
+        methods: {
+            onSave(form, event) {
                 event.preventDefault();
                 console.log(form);
-                this.$emit('handlingSubmit',{tittle:form.fields.type, name: form.fields.name, completed: form.fields.checked});
+                this.$emit('handlingSubmit', {
+                    tittle: form.fields.type,
+                    name: form.fields.name,
+                    completed: form.fields.checked
+                });
+
             },
-           async onUpdate(form){
-               this.todos.splice(this.index, 1, {tittle:form.fields.type, name: form.fields.name, completed: form.fields.checked})
-               await Api.toDo.upDateTodo(this.todos[this.index].id, {tittle:form.fields.type, name: form.fields.name, completed: form.fields.checked});
-            }
+            ...mapActions({
+                onUpdateToDO: ACTIONS_UPDATE_TODO
+            }),
         },
-        props:{
-            todos:{
+        props: {
+            todos: {
                 type: Array,
                 default: null
             }
         },
-        created() {
+        beforeCreate() {
             eventBus.$on('HandlingIndexUpDate', (value) => {
                 this.form.fields.type = this.todos[value].tittle;
                 this.form.fields.name = this.todos[value].name;

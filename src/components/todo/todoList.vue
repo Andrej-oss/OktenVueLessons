@@ -1,15 +1,15 @@
 <template>
     <div>
-        <todo-input @handlingSubmit="createTodo" :todos="toDoes" />
+        <todo-input @handlingSubmit="saveToDo($event)"  :todos="toDoes"/>
         <div class="todo-cards">
-        <div v-for="(todo, i) in toDoes" :key="todo.id">
-            <todo-item
-                    :todo="todo"
-                    :index="i"
-                    @HandlingIndexDelete="deleteTodo(todo.id)"
-            />
+            <div v-for="(todo, i) in toDoes" :key="todo.id">
+                <todo-item
+                        :todo="todo"
+                        :index="i"
+                        @HandlingIndexDelete="deleteTodo(todo.id)"
+                />
+            </div>
         </div>
-    </div>
     </div>
 </template>
 
@@ -17,48 +17,40 @@
 
     import todoItem from "./todoItem";
     import todoInput from "./todoInput";
-    import {Api} from "../api";
+    import {todoModule} from "../../store/todo";
+    import {createNamespacedHelpers} from "vuex";
+    import { ACTIONS_GET_ALL_TODO, ACTIONS_SAVE_TODO} from "../../store/todo/types";
+
+
+    const {mapActions, mapState} = createNamespacedHelpers(todoModule);
 
     export default {
         name: "todoList",
-        components:{
+        components: {
             todoItem,
             todoInput
         },
-        data(){
-            return{
-                updateTodo:{},
-                toDoes: [{
-                    tittle: 'First',
-                    name: 'Make task 2'
-                }]
-            }
-        },
-        methods:{
-            async createTodo(event){
-               // this.toDoes.push(event);
-                await Api.toDo.createTodo(event);
-               this.getTodo();
+        methods: {
+
+            get() {
             },
-            async deleteTodo(i){
-               await Api.toDo.deleteTodo(i);
-                this.getTodo();
-            },
-            async getTodo(){
-                const todoArray = [];
-                const result =  await Api.toDo.getAllTodo();
-                Object.entries(result.body).forEach(([key, value]) => todoArray.push({id: key,...value}));
-                this.toDoes = todoArray;
-                console.log(result.body, todoArray)
-            }
+            ...mapActions({
+                getToDos: ACTIONS_GET_ALL_TODO,
+                saveToDo: ACTIONS_SAVE_TODO,
+            })
         },
-        async beforeMount() {
-           await this.getTodo();
-        }
+        computed: {
+            ...mapState({
+                toDoes: state => state.todo
+            }),
+        },
+        beforeMount() {
+            this.getToDos()
+        },
     }
 </script>
 <style scoped>
-    .todo-cards{
+    .todo-cards {
         display: flex;
         flex-wrap: wrap;
     }

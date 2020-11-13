@@ -7,7 +7,7 @@
                     <p class="card-text">{{todo.name}}</p>
                     <p v-if="todo.completed" style="font-size: small">Completed</p>
                     <p v-else style="font-size: small">Not Completed</p>
-                    <a href="#" class="btn btn-primary" @click="onDelete(index)" style="margin-right: 10px">Delete</a>
+                    <a href="#" class="btn btn-primary" @click="onDelete(todo.id)" style="margin-right: 10px">Delete</a>
                     <a href="#" class="btn btn-primary" @click="onUpdate(index)">Update</a>
                 </div>
             </div>
@@ -18,6 +18,11 @@
 <script>
 
     import {eventBus} from "../../main";
+    import {todoModule} from "../../store/todo";
+    import {createNamespacedHelpers} from "vuex";
+    import {ACTIONS_DELETE_TODO} from "../../store/todo/types";
+
+    const{mapActions} = createNamespacedHelpers(todoModule);
 
     export default {
         name: "todoItem",
@@ -32,14 +37,13 @@
             }
         },
         methods:{
-            onDelete(i){
-                console.log(i);
-                this.$emit('HandlingIndexDelete', i)
-            },
             onUpdate(i){
                 console.log(i)
                eventBus.$emit('HandlingIndexUpDate', i);
-            }
+            },
+            ...mapActions({
+                onDelete: ACTIONS_DELETE_TODO
+            })
         }
     }
 </script>
