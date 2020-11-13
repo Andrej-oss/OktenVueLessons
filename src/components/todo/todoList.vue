@@ -1,7 +1,6 @@
 <template>
     <div>
         <todo-input @handlingSubmit="saveToDo($event)"  :todos="toDoes"/>
-        {{`${toDoes}`}}
         <div class="todo-cards">
             <div v-for="(todo, i) in toDoes" :key="todo.id">
                 <todo-item
